@@ -16,7 +16,7 @@ def clean_ames_data(file_path: str) -> None:
     df.columns = [col.replace(".", "") for col in df.columns]
 
     # remove unnecessary columns, very rare neighborhoods, known outliers
-    df = df.drop(["Order", "PID"], axis="columns")
+    df = df.drop(["Order", "PID"], axis="columns", errors="ignore")
     df = df.loc[~df["Neighborhood"].isin(["GrnHill", "Landmrk"]), :]
     df = df.loc[df["GrLivArea"] <= 4000, :]
 
